@@ -42,13 +42,13 @@ confs = [
 
   # assign car via param
   # echo -n TOYOTA C-HR 2021 > /data/params/d/dp_car_assigned
-  {'name': 'dp_car_assigned', 'default': '', 'type': 'Text', 'conf_type': ['param']},
+  {'name': 'dp_car_assigned', 'default': 'TOYOTA COROLLA TSS2 2019', 'type': 'Text', 'conf_type': ['param']},
   {'name': 'dp_car_list', 'default': '', 'type': 'Text', 'conf_type': ['param']},
 
   {'name': 'dp_last_modified', 'default': str(floor(time.time())), 'type': 'Text', 'conf_type': ['param']},
 
   # lateral - alc
-  {'name': 'dp_lateral_mode', 'default': 1, 'type': 'UInt8', 'min': 0, 'max': 2, 'conf_type': ['param', 'struct']},
+  {'name': 'dp_lateral_mode', 'default': 2, 'type': 'UInt8', 'min': 0, 'max': 2, 'conf_type': ['param', 'struct']},
   # {'name': 'dp_signal_off_delay', 'default': 3., 'type': 'Float32', 'min': 0., 'max': 10., 'depends': [{'name': 'dp_lateral_mode', 'vals': [0]}], 'conf_type': ['param', 'struct']},
   {'name': 'dp_lc_min_mph', 'default': 15, 'type': 'UInt8', 'min': 0, 'max': 255, 'depends': [{'name': 'dp_lateral_mode', 'vals': [1, 2]}], 'conf_type': ['param', 'struct']},
   {'name': 'dp_lc_auto_min_mph', 'default': 40, 'type': 'UInt8', 'min': 0, 'max': 255, 'depends': [{'name': 'dp_lateral_mode', 'vals': [2]}], 'conf_type': ['param', 'struct']},
@@ -60,7 +60,7 @@ confs = [
 
   #ui
   {'name': 'dp_ip_addr', 'default': '', 'type': 'Text', 'conf_type': ['struct']},
-  {'name': 'dp_quiet_drive', 'default': False, 'type': 'Bool', 'conf_type': ['param']},
+  {'name': 'dp_quiet_drive', 'default': True, 'type': 'Bool', 'conf_type': ['param']},
   {'name': 'dp_ui_top', 'default': False, 'type': 'Bool', 'conf_type': ['param', 'struct']},
   {'name': 'dp_ui_side', 'default': False, 'type': 'Bool', 'conf_type': ['param', 'struct']},
   #{'name': 'dp_ui_volume', 'default': -5, 'type': 'Int8', 'min': -5, 'max': 100, 'conf_type': ['param', 'struct']},
@@ -94,7 +94,7 @@ confs = [
   {'name': 'dp_dashcamd', 'default': False, 'type': 'Bool', 'conf_type': ['param', 'struct']},
   # # auto shutdown
   {'name': 'dp_auto_shutdown', 'default': True, 'type': 'Bool', 'conf_type': ['param']},
-  {'name': 'dp_auto_shutdown_in', 'default': 60, 'type': 'UInt16', 'min': 0, 'max': 600, 'depends': [{'name': 'dp_auto_shutdown', 'vals': [True]}], 'conf_type': ['param']},
+  {'name': 'dp_auto_shutdown_in', 'default': 50, 'type': 'UInt16', 'min': 0, 'max': 600, 'depends': [{'name': 'dp_auto_shutdown', 'vals': [True]}], 'conf_type': ['param']},
 
   {'name': 'dp_mazda_steer_alert', 'default': False, 'type': 'Bool', 'conf_type': ['param', 'struct']},
   {'name': 'dp_mazda_dashcam_bypass', 'default': False, 'type': 'Bool', 'conf_type': ['param']},
@@ -115,9 +115,9 @@ confs = [
   # {'name': 'dp_lane_less_mode', 'default': 2, 'type': 'UInt8', 'min': 0, 'max': 2, 'depends': [{'name': 'dp_lane_less_mode_ctrl', 'vals': [True]}], 'conf_type': ['param', 'struct']},
   # # long ctrl
   # {'name': 'dp_allow_gas', 'default': False, 'type': 'Bool', 'depends': [{'name': 'dp_atl', 'vals': [False]}], 'conf_type': ['param', 'struct']},
-  {'name': 'dp_following_profile_ctrl', 'default': False, 'type': 'Bool', 'conf_type': ['param', 'struct']},
+  {'name': 'dp_following_profile_ctrl', 'default': True, 'type': 'Bool', 'conf_type': ['param', 'struct']},
   {'name': 'dp_following_profile', 'default': 0, 'type': 'UInt8', 'min': 0, 'max': 2, 'depends': [{'name': 'dp_following_profile_ctrl', 'vals': [True]}], 'conf_type': ['param', 'struct']},
-  {'name': 'dp_lateral_tune', 'default': 0, 'type': 'UInt8', 'conf_type': ['param']},
+  {'name': 'dp_lateral_tune', 'default': 1, 'type': 'UInt8', 'conf_type': ['param']},
   {'name': 'dp_lateral_torque_live_tune', 'default': False, 'type': 'Bool', 'conf_type': ['param']},
   {'name': 'dp_lateral_alt', 'default': False, 'type': 'Bool', 'conf_type': ['param', 'struct']},
   {'name': 'dp_lateral_alt_speed', 'default': 80, 'type': 'UInt8', 'min': 10, 'max': 130, 'depends': [{'name': 'dp_lateral_alt', 'vals': [True]}], 'conf_type': ['param', 'struct']},

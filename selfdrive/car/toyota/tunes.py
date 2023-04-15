@@ -89,7 +89,7 @@ def set_lat_tune(tune, name, MAX_LAT_ACCEL=2.5, FRICTION=0.01, steering_angle_de
       tune.pid.kf = 0.00006
     elif name == LatTunes.PID_D:
       tune.pid.kpV = [0.6]
-      tune.pid.kiV = [0.1]
+      tune.pid.kiV = [0.09]
       tune.pid.kf = 0.00007818594
     elif name == LatTunes.PID_F:
       tune.pid.kpV = [0.723]
