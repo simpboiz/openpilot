@@ -11,6 +11,7 @@ from selfdrive.car.toyota.interface import CarInterface
 from opendbc.can.packer import CANPacker
 from common.conversions import Conversions as CV
 from common.params import Params
+from selfdrive.controls.lib.events import Events
 
 VisualAlert = car.CarControl.HUDControl.VisualAlert
 
@@ -93,6 +94,7 @@ class CarController:
     # use communityfeaturestoggle to enable faster start from a stop when not in bumper to bumper traffic
     if Params().get_bool("dp_toyota_rav4_tss2_tune"):
       pcm_accel_cmd = 0 if not (CC.longActive) else clip(actuators.accel + boost, pid_accel_limits[0], pid_accel_limits[1])
+      events.add(EventName.boostActive)
     else:
       pcm_accel_cmd = clip(actuators.accel, CarControllerParams.ACCEL_MIN, CarControllerParams.ACCEL_MAX)
 
