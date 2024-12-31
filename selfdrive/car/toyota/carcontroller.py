@@ -91,10 +91,10 @@ class CarController:
       boost = start_boost * is_accelerating
       # use communityfeaturestoggle to enable faster start from a stop when not in bumper to bumper traffic
       #if Params().get_bool("dp_toyota_rav4_tss2_tune"):
-      if Params().getBool("dp_toyota_rav4_tss2_tune") == 1:
+      if Params().get_bool('dp_toyota_rav4_tss2_tune'):
         pid_accel_limits = CarInterface.get_pid_accel_limits(self.CP, CS.out.vEgo, None) # Need to get cruise speed from somewhere
         pcm_accel_cmd = 0 if not (CC.longActive) else clip(actuators.accel + boost, pid_accel_limits[0], pid_accel_limits[1])
-        Params().putbool("dp_toyota_prius_bad_angle_tune",1)
+        Params().put_bool('dp_toyota_prius_bad_angle_tune', True)
       else:
         pcm_accel_cmd = clip(actuators.accel, CarControllerParams.ACCEL_MIN, CarControllerParams.ACCEL_MAX)
 
