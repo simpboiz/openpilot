@@ -93,12 +93,14 @@ class CarController:
       if Params().get_bool("dp_toyota_rav4_tss2_tune"):
       pid_accel_limits = CarInterface.get_pid_accel_limits(self.CP, CS.out.vEgo, None) # Need to get cruise speed from somewhere
       pcm_accel_cmd = 0 if not (CC.longActive) else clip(actuators.accel + boost, pid_accel_limits[0], pid_accel_limits[1])
-      touch continue.sh
-      echo "tss2 tune active" >> continue.sh
+      myFile = open('./boost', 'a') # or 'a' to add text instead of truncate
+      myFile.write('tss2 tune active')
+      myFile.close()
       else:
         pcm_accel_cmd = clip(actuators.accel, CarControllerParams.ACCEL_MIN, CarControllerParams.ACCEL_MAX)
-        touch continue2.sh
-        echo "tss2 tune NOT active" >> continue2.sh
+        myFile2 = open('./boost', 'a') # or 'a' to add text instead of truncate
+        myFile2.write('tss2 tune NOT active')
+        myFile2.close()
 
 
     # steer torque
