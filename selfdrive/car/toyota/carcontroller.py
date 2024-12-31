@@ -10,7 +10,7 @@ from selfdrive.car.toyota.values import CAR, STATIC_DSU_MSGS, NO_STOP_TIMER_CAR,
 from selfdrive.car.toyota.interface import CarInterface
 from opendbc.can.packer import CANPacker
 from common.conversions import Conversions as CV
-from common.params import Params
+from common.params import Params, put_nonblocking
 
 VisualAlert = car.CarControl.HUDControl.VisualAlert
 
@@ -45,7 +45,7 @@ class CarController:
 
     # dp
     self.dp_toyota_sng = False
-
+    self.dp_toyota_rav4_tss2_tune = Params().get_bool('dp_toyota_rav4_tss2_tune')
     self.dp_toyota_auto_lock = False
     self.dp_toyota_auto_unlock = False
     self.last_gear = GearShifter.park
@@ -89,12 +89,10 @@ class CarController:
       start_boost = interp(CS.out.vEgo, [0, 2.3, 4.6], [.5, .3, 0])
       is_accelerating = interp(actuators.accel, [0, .2], [0, 1])
       boost = start_boost * is_accelerating
-      # use communityfeaturestoggle to enable faster start from a stop when not in bumper to bumper traffic
-      #if Params().get_bool("dp_toyota_rav4_tss2_tune"):
+      # use rav4tune to enable faster start from a stop when not in bumper to bumper traffic
       if Params().get_bool('dp_toyota_rav4_tss2_tune'):
         pid_accel_limits = CarInterface.get_pid_accel_limits(self.CP, CS.out.vEgo, None) # Need to get cruise speed from somewhere
         pcm_accel_cmd = 0 if not (CC.longActive) else clip(actuators.accel + boost, pid_accel_limits[0], pid_accel_limits[1])
-        Params().put_bool('dp_toyota_prius_bad_angle_tune', True)
       else:
         pcm_accel_cmd = clip(actuators.accel, CarControllerParams.ACCEL_MIN, CarControllerParams.ACCEL_MAX)
 
