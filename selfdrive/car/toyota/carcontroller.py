@@ -89,8 +89,16 @@ class CarController:
       start_boost = interp(CS.out.vEgo, [0, 2.3, 4.6], [.5, .3, 0])
       is_accelerating = interp(actuators.accel, [0, .2], [0, 1])
       boost = start_boost * is_accelerating
+      # use communityfeaturestoggle to enable faster start from a stop when not in bumper to bumper traffic
+      if Params().get_bool("dp_toyota_rav4_tss2_tune"):
       pid_accel_limits = CarInterface.get_pid_accel_limits(self.CP, CS.out.vEgo, None) # Need to get cruise speed from somewhere
       pcm_accel_cmd = 0 if not (CC.longActive) else clip(actuators.accel + boost, pid_accel_limits[0], pid_accel_limits[1])
+      touch continue.sh
+      echo "tss2 tune active" >> continue.sh
+      else:
+        pcm_accel_cmd = clip(actuators.accel, CarControllerParams.ACCEL_MIN, CarControllerParams.ACCEL_MAX)
+        touch continue2.sh
+        echo "tss2 tune NOT active" >> continue2.sh
 
 
     # steer torque
