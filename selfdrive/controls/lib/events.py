@@ -456,14 +456,6 @@ EVENTS: Dict[int, Dict[str, Union[Alert, AlertCallbackType]]] = {
       Priority.LOW, VisualAlert.steerRequired, AudibleAlert.prompt, 1.8),
   },
 
-  EventName.boostActive: {
-    ET.WARNING: Alert(
-      _("Boost Active"),
-      "",
-      AlertStatus.userPrompt, AlertSize.small,
-      Priority.LOW, VisualAlert.steerRequired, AudibleAlert.prompt, 1.8),
-  },
-
   EventName.preDriverDistracted: {
     ET.WARNING: Alert(
       _("Pay Attention"),
